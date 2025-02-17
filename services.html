@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Snack Anas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF0000;
+            --background-yellow: #FFFFE0;
+            --text-color: #000000;
+        }
+
+        body {
+            background-color: var(--background-yellow);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: var(--primary-red) !important;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            color: #FFD700 !important;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            color: #FFD700 !important;
+            font-size: 1.1rem;
+            margin: 0 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #FFD700;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .page-container {
+            position: relative;
+            padding-top: 80px;
+            min-height: 100vh;
+            background-image: url('images/background1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .page-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 224, 0.93);
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .services-title {
+            position: relative;
+            z-index: 2;
+            color: #FF0000;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin: 3rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .services-container {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-category {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .service-category:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(31, 38, 135, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .category-title {
+            color: #FF6B6B;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, #FF6B6B, #FFB6C1);
+            border-radius: 2px;
+        }
+
+        .service-item {
+            color: #2E8B57;
+            margin: 1.2rem 0;
+            font-size: 1.1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #FF6B6B;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 107, 107, 0.1);
+            transform: translateX(5px);
+        }
+
+        .tagline {
+            position: relative;
+            z-index: 2;
+            color: #FF6B6B;
+            font-size: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-category:nth-child(1) { animation-delay: 0.1s; }
+        .service-category:nth-child(2) { animation-delay: 0.3s; }
+        .service-category:nth-child(3) { animation-delay: 0.5s; }
+        .service-category:nth-child(4) { animation-delay: 0.7s; }
+
+        @media (max-width: 992px) {
+            .services-container {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 1rem;
+            }
+            
+            .services-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .services-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .services-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                Snack🥘Anas 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservation.html">Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="localisation.html">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact us 📞</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informations.html">👤</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <h1 class="services-title">Our Services ✨</h1>
+
+        <div class="services-container">
+            <div class="service-category">
+                <h2 class="category-title">Traditional Dining</h2>
+                <div class="service-item">Private Room (6-12): 150 $</div>
+                <div class="service-item">Family Gathering (8-15): 200 $</div>
+                <div class="service-item">Small Group Dining (4-8): 1000 $</div>
+            </div>
+
+            <div class="service-category">
+                <h2 class="category-title">Event Services</h2>
+                <div class="service-item">Wedding Package (100): 3500 $</div>
+                <div class="service-item">Corporate Events (50): 2000 $</div>
+                <div class="service-item">Birthday Celebration (30): 1200 $</div>
+            </div>
+
+            <div class="service-category">
+                <h2 class="category-title">Cultural Experience</h2>
+                <div class="service-item">Cooking Workshop (5-15): 5000 $</div>
+                <div class="service-item">Music & Dinner Show: 3000 $</div>
+                <div class="service-item">Tea Ceremony: 1500 $</div>
+            </div>
+
+            <div class="service-category">
+                <h2 class="category-title">Catering Solutions</h2>
+                <div class="service-item">Private Chef Service: 2500 $</div>
+                <div class="service-item">Food Truck Service: 5000 $</div>
+                <div class="service-item">Festival Package: 15000 $</div>
+            </div>
+        </div>
+
+        <div class="tagline">
+            <span>🌶️ From Our Tagine to Your Table 🍽️</span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Effet de parallaxe sur l'arrière-plan
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            document.querySelector('.page-container').style.backgroundPositionY = -(scrolled * 0.5) + 'px';
+        });
+
+        // Animation de la navbar au scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '0.5rem 1rem';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.padding = '1rem';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

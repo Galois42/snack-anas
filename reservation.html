@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - Snack Anas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+    <style>
+        :root {
+            --primary-red: #FF0000;
+            --background-yellow: #FFFFE0;
+            --text-color: #000000;
+        }
+
+        body {
+            background-color: var(--background-yellow);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--primary-red) !important;
+            padding: 1rem;
+        }
+
+        .navbar-brand {
+            color: #FFD700 !important;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            color: #FFD700 !important;
+            font-size: 1.1rem;
+            margin: 0 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #FFD700;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .nav-link:hover::after {
+    width: 100%;
+}
+
+        .reservation-title {
+            color: #FF0000;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .reservation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            padding: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #FF6B6B;
+            box-shadow: 0 0 0 0.2rem rgba(255,107,107,0.25);
+        }
+
+        .btn-reserve {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-reserve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            background-color: #FF5252;
+        }
+
+        .tagline {
+            color: #FF6B6B;
+            font-size: 1.8rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .flatpickr-calendar {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .flatpickr-day.reserved-date {
+            background-color: #ffcccc;
+            border-color: #ff9999;
+            color: #ff0000;
+            text-decoration: line-through;
+            cursor: not-allowed;
+        }
+
+        .flatpickr-day.reserved-date:hover {
+            background-color: #ffcccc !important;
+            border-color: #ff9999 !important;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                Snack🥘Anas 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservation.html">Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="localisation.html">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact us 📞</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informations.html">👤</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <h1 class="reservation-title">Reservation 🎟️</h1>
+
+    <div class="reservation-container">
+        <form id="reservationForm">
+            <div class="form-group">
+                <label for="date" class="form-label">Select Date</label>
+                <input type="text" class="form-control" id="date" placeholder="Choose a date">
+            </div>
+            <div class="form-group">
+                <label for="event" class="form-label">Event Type</label>
+                <input type="text" class="form-control" id="event" placeholder="e.g., Engagement party">
+            </div>
+            <button type="submit" class="btn btn-reserve">Confirm Reservation</button>
+        </form>
+    </div>
+
+    <div class="tagline">
+        <span>🌶️ From Our Tagine to Your Table 🍽️</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Dates déjà réservées (format: "DD-MM-YYYY")
+    const reservedDates = [
+        "25-02-2025", // Mariage
+        "26-02-2025", // Mariage (jour 2)
+        "01-03-2025", // Anniversaire
+        "03-03-2025", // Événement d'entreprise
+        "16-03-2025", // Fiançailles
+        "21-03-2025", // Fête familiale
+        "25-03-2025", // Workshop cuisine
+        "05-04-2025", // Célébration
+        "12-04-2025"  // Événement culturel
+    ];
+
+    // Initialisation du calendrier
+    const calendar = flatpickr("#date", {
+        dateFormat: "d-m-Y",
+        minDate: "today",
+        maxDate: new Date().fp_incr(60), // 60 jours à partir d'aujourd'hui
+        disable: [
+            function(date) {
+                // Désactive les dates passées
+                if (date < new Date()) return true;
+
+                // Désactive les dates réservées
+                const formattedDate = date.getDate().toString().padStart(2, '0') + "-" +
+                                    (date.getMonth() + 1).toString().padStart(2, '0') + "-" +
+                                    date.getFullYear();
+                return reservedDates.includes(formattedDate);
+            }
+        ],
+        locale: {
+            firstDayOfWeek: 1 // Commence la semaine le lundi
+        },
+        onChange: function(selectedDates, dateStr, instance) {
+            // Affiche un message si la date est réservée
+            const formattedDate = dateStr;
+            if (reservedDates.includes(formattedDate)) {
+                alert("Cette date est déjà réservée. Veuillez choisir une autre date.");
+                instance.clear();
+            }
+        },
+        onOpen: function(selectedDates, dateStr, instance) {
+            // Ajoute une classe personnalisée aux dates réservées
+            setTimeout(() => {
+                const days = instance.days.childNodes;
+                days.forEach(day => {
+                    const date = new Date(day.dateObj);
+                    if (date) {
+                        const formattedDate = date.getDate().toString().padStart(2, '0') + "-" +
+                                            (date.getMonth() + 1).toString().padStart(2, '0') + "-" +
+                                            date.getFullYear();
+                        if (reservedDates.includes(formattedDate)) {
+                            day.classList.add('reserved-date');
+                        }
+                    }
+                });
+            }, 100);
+        }
+    }); // Accolade fermante manquante ajoutée ici
+
+    // Gestion du formulaire
+    const form = document.getElementById('reservationForm');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const date = document.getElementById('date').value;
+        const event = document.getElementById('event').value;
+
+        if (!date || !event) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        window.location.href = `confirmation.html?date=${encodeURIComponent(date)}&event=${encodeURIComponent(event)}`;
+    });
+});
+    </script>
+</body>
+</html>

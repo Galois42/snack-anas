@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location - Snack Anas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF0000;
+            --background-yellow: #FFFFE0;
+            --text-color: #000000;
+        }
+
+        body {
+            background-color: var(--background-yellow);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--primary-red) !important;
+            padding: 1rem;
+        }
+
+        .navbar-brand {
+            color: #FFD700 !important;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            color: #FFD700 !important;
+            font-size: 1.1rem;
+            margin: 0 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #FFD700;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-link:hover::after {
+    width: 100%;
+}
+
+        .location-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .map-container {
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .map-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .info-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        .info-title {
+            color: #FF0000;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #FF0000;
+            padding-bottom: 0.5rem;
+        }
+
+        .info-item {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #FF6B6B;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .tagline {
+            color: #FF6B6B;
+            font-size: 1.8rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Animation pour la carte au survol */
+        .map-container:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                Snack🥘Anas
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservation.html">Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="localisation.html">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact us 📞</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informations.html">👤</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="location-container">
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <div class="map-container">
+                    <!-- Image de la carte fictive -->
+                    <img src="images/carte.png" alt="Location Map" class="map-image">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="info-container">
+                    <h2 class="info-title">Notre localisation</h2>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span class="info-icon">📍</span>Adresse
+                        </div>
+                        <div class="info-value">123 Rue Ibn Nafis, Casablanca, Maroc</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span class="info-icon">📞</span>Téléphone
+                        </div>
+                        <div class="info-value">+1 343 575-3323</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span class="info-icon">✉️</span>Email
+                        </div>
+                        <div class="info-value">contact@snackanas.com</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <span class="info-icon">🕒</span>Heures d'ouverture
+                        </div>
+                        <div class="info-value">
+                            Lundi - Samedi: 11h00 - 22h00<br>
+                            Dimanche: 12h00 - 21h00
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tagline">
+        <span>🌶️ From Our Tagine to Your Table 🍽️</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

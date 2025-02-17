@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Information - Snack Anas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF0000;
+            --background-yellow: #FFFFE0;
+            --text-color: #000000;
+        }
+
+        body {
+            background-color: var(--background-yellow);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--primary-red) !important;
+            padding: 1rem;
+        }
+
+        .navbar-brand {
+            color: #FFD700 !important;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            color: #FFD700 !important;
+            font-size: 1.1rem;
+            margin: 0 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #FFD700;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .nav-link:hover::after {
+    width: 100%;
+}
+
+        .client-info-title {
+            color: #FF0000;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #FF6B6B;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            border-bottom: 2px solid #FF6B6B;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #228B22;
+        }
+
+        .form-control {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:disabled {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+        }
+
+        .edit-btn {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            background-color: #FF6B6B;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn {
+            display: none;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tagline {
+            color: #FF6B6B;
+            font-size: 1.8rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                Snack🥘Anas 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservation.html">Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="localisation.html">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact us 📞</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informations.html">👤</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <h1 class="client-info-title">Client Information 👤</h1>
+
+    <div class="info-container position-relative">
+        <button class="edit-btn" onclick="toggleEdit()">Edit</button>
+        <form id="clientInfoForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="section-title">Personal Information</h2>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" value="James Wilson" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" value="jwilson@email.com" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="phone" value="+44 7700 900123" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" value="1985-03-15" disabled>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <h2 class="section-title">Dietary Requirements</h2>
+                    <div class="form-group">
+                        <label class="form-label">Allergies</label>
+                        <input type="text" class="form-control" id="allergies" value="Shellfish" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Special Diet</label>
+                        <input type="text" class="form-control" id="specialDiet" value="Vegetarian" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Food Preferences</label>
+                        <input type="text" class="form-control" id="foodPreferences" value="Spicy food lover" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Special Notes</label>
+                        <input type="text" class="form-control" id="specialNotes" value="No cilantro please" disabled>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <h2 class="section-title">Payment Method</h2>
+                    <div class="form-group">
+                        <label class="form-label">Card Type</label>
+                        <input type="text" class="form-control" id="cardType" value="Visa" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="cardNumber" value="****2468" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiryDate" value="09/25" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cardholder Name</label>
+                        <input type="text" class="form-control" id="cardholderName" value="JAMES WILSON" disabled>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn save-btn" id="saveButton">Save Changes</button>
+        </form>
+    </div>
+
+    <div class="tagline">
+        <span>🌶️ From Our Tagine to Your Table 🍽️</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fonction pour charger les données depuis le localStorage
+        function loadClientData() {
+            const savedData = localStorage.getItem('clientInfo');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                Object.keys(data).forEach(key => {
+                    const input = document.getElementById(key);
+                    if (input) {
+                        input.value = data[key];
+                    }
+                });
+            }
+        }
+
+        // Fonction pour sauvegarder les données dans le localStorage
+        function saveClientData() {
+            const formData = {};
+            document.querySelectorAll('.form-control').forEach(input => {
+                formData[input.id] = input.value;
+            });
+            localStorage.setItem('clientInfo', JSON.stringify(formData));
+        }
+
+        // Fonction pour gérer l'édition
+        function toggleEdit() {
+            const inputs = document.querySelectorAll('.form-control');
+            const editBtn = document.querySelector('.edit-btn');
+            const saveBtn = document.querySelector('.save-btn');
+
+            inputs.forEach(input => {
+                input.disabled = !input.disabled;
+            });
+
+            if (editBtn.textContent === 'Edit') {
+                editBtn.textContent = 'Cancel';
+                editBtn.style.backgroundColor = '#dc3545';
+                saveBtn.style.display = 'block';
+            } else {
+                editBtn.textContent = 'Edit';
+                editBtn.style.backgroundColor = '#FF6B6B';
+                saveBtn.style.display = 'none';
+                // Recharger les données sauvegardées
+                loadClientData();
+            }
+        }
+
+        // Gestionnaire de formulaire
+        document.getElementById('clientInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveClientData();
+            alert('Changes saved successfully!');
+            toggleEdit();
+        });
+
+        // Charger les données au chargement de la page
+        document.addEventListener('DOMContentLoaded', loadClientData);
+    </script>
+</body>
+</html>
